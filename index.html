@@ -16,12 +16,19 @@
       --surface: #FFFFFF;
       --text: #1C1C1A;
       --muted: #6B6B68;
-      --accent: #2E6BE6;
+      --accent: #5B9BFF;
+      --accent-body: #2E6BE6;
       --accent-light: #EBF1FD;
       --border: #E4E4E0;
       --radius: 10px;
       --radius-sm: 6px;
       --max: 1000px;
+      --hero-bg: #0D1526;
+      --hero-bg2: #162040;
+      --hero-text: #FFFFFF;
+      --hero-muted: rgba(255,255,255,0.6);
+      --hero-border: rgba(255,255,255,0.12);
+      --hero-surface: rgba(255,255,255,0.07);
     }
 
     html { scroll-behavior: smooth; }
@@ -40,9 +47,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(247,247,245,0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(13,21,38,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--hero-border);
     }
 
     .nav-inner {
@@ -59,7 +66,7 @@
       font-family: 'Sora', sans-serif;
       font-weight: 600;
       font-size: 15px;
-      color: var(--text);
+      color: #fff;
       text-decoration: none;
       letter-spacing: -0.02em;
     }
@@ -74,25 +81,26 @@
 
     .nav-links a {
       font-size: 14px;
-      color: var(--muted);
+      color: rgba(255,255,255,0.6);
       text-decoration: none;
       transition: color 0.15s;
     }
 
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: #fff; }
 
     .nav-cta {
       font-size: 14px;
       font-weight: 500;
-      color: var(--accent);
+      color: #fff;
       text-decoration: none;
       padding: 7px 16px;
+      background: var(--accent);
       border: 1px solid var(--accent);
       border-radius: var(--radius-sm);
-      transition: background 0.15s, color 0.15s;
+      transition: opacity 0.15s;
     }
 
-    .nav-cta:hover { background: var(--accent); color: #fff; }
+    .nav-cta:hover { opacity: 0.85; }
 
     .nav-mobile-toggle {
       display: none;
@@ -105,9 +113,14 @@
 
     /* ── HERO ── */
     #hero {
+      background: linear-gradient(155deg, var(--hero-bg) 0%, var(--hero-bg2) 100%);
+      border-bottom: 1px solid var(--hero-border);
+    }
+
+    #hero .hero-inner {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 96px 24px 80px;
+      padding: 96px 24px 88px;
     }
 
     .hero-tag {
@@ -116,7 +129,8 @@
       gap: 6px;
       font-size: 13px;
       color: var(--accent);
-      background: var(--accent-light);
+      background: rgba(91,155,255,0.12);
+      border: 1px solid rgba(91,155,255,0.25);
       padding: 4px 12px;
       border-radius: 20px;
       margin-bottom: 24px;
@@ -137,7 +151,7 @@
       font-weight: 600;
       line-height: 1.12;
       letter-spacing: -0.03em;
-      color: var(--text);
+      color: var(--hero-text);
       max-width: 700px;
       margin-bottom: 20px;
     }
@@ -146,6 +160,7 @@
       position: relative;
       display: inline-block;
       white-space: nowrap;
+      color: var(--accent);
     }
 
     .hero-headline .underline-word::after {
@@ -164,7 +179,7 @@
 
     .hero-sub {
       font-size: 17px;
-      color: var(--muted);
+      color: var(--hero-muted);
       max-width: 520px;
       margin-bottom: 36px;
       line-height: 1.65;
@@ -193,17 +208,17 @@
     .btn-secondary {
       display: inline-block;
       background: transparent;
-      color: var(--text);
+      color: rgba(255,255,255,0.85);
       font-size: 15px;
       font-weight: 500;
       padding: 12px 26px;
       border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
+      border: 1px solid var(--hero-border);
       text-decoration: none;
       transition: border-color 0.15s, background 0.15s;
     }
 
-    .btn-secondary:hover { border-color: var(--text); background: var(--surface); }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.07); }
 
     /* ── SECTIONS SHARED ── */
     .section {
@@ -222,8 +237,20 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--accent-body);
       margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--accent-body);
+      border-radius: 2px;
     }
 
     .section-heading {
@@ -254,10 +281,14 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 28px;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
 
-    .service-card:hover { border-color: var(--accent); }
+    .service-card:hover {
+      border-color: var(--accent-body);
+      box-shadow: 0 4px 16px rgba(46,107,230,0.10);
+      transform: translateY(-2px);
+    }
 
     .service-icon {
       width: 40px;
@@ -273,7 +304,7 @@
     .service-icon svg {
       width: 20px;
       height: 20px;
-      stroke: var(--accent);
+      stroke: var(--accent-body);
       fill: none;
       stroke-width: 1.8;
       stroke-linecap: round;
@@ -305,10 +336,14 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
 
-    .work-card:hover { border-color: var(--accent); }
+    .work-card:hover {
+      border-color: var(--accent-body);
+      box-shadow: 0 4px 16px rgba(46,107,230,0.10);
+      transform: translateY(-2px);
+    }
 
     .work-img {
       width: 100%;
@@ -349,7 +384,7 @@
     .tag {
       font-size: 11px;
       font-weight: 500;
-      color: var(--accent);
+      color: var(--accent-body);
       background: var(--accent-light);
       padding: 3px 10px;
       border-radius: 20px;
@@ -363,7 +398,7 @@
     .work-link {
       font-size: 13px;
       font-weight: 500;
-      color: var(--accent);
+      color: var(--accent-body);
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -465,7 +500,7 @@
     .contact-detail svg {
       width: 16px;
       height: 16px;
-      stroke: var(--accent);
+      stroke: var(--accent-body);
       fill: none;
       stroke-width: 1.8;
       stroke-linecap: round;
@@ -478,7 +513,7 @@
       text-decoration: none;
     }
 
-    .contact-detail a:hover { color: var(--accent); }
+    .contact-detail a:hover { color: var(--accent-body); }
 
     /* Form */
     .form-row {
@@ -501,25 +536,6 @@
       color: var(--text);
     }
 
-    .form-group input,
-    .form-group textarea {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--text);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      outline: none;
-      transition: border-color 0.15s;
-      resize: vertical;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus { border-color: var(--accent); }
-
-    .form-group textarea { min-height: 110px; }
-
     .chip-group {
       display: flex;
       flex-wrap: wrap;
@@ -539,8 +555,8 @@
       user-select: none;
     }
 
-    .chip-option:hover { border-color: var(--accent); color: var(--accent); }
-    .chip-option.active { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+    .chip-option:hover { border-color: var(--accent-body); color: var(--accent-body); }
+    .chip-option.active { background: var(--accent-light); border-color: var(--accent-body); color: var(--accent-body); }
 
     .budget-group {
       display: grid;
@@ -562,8 +578,27 @@
       user-select: none;
     }
 
-    .budget-option:hover { border-color: var(--accent); color: var(--accent); }
-    .budget-option.active { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+    .budget-option:hover { border-color: var(--accent-body); color: var(--accent-body); }
+    .budget-option.active { background: var(--accent-light); border-color: var(--accent-body); color: var(--accent-body); }
+
+    .form-group input,
+    .form-group textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.15s;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent-body); }
+
+    .form-group textarea { min-height: 110px; }
 
     .form-submit {
       width: 100%;
@@ -622,7 +657,7 @@
       transition: color 0.15s;
     }
 
-    .footer-links a:hover { color: var(--accent); }
+    .footer-links a:hover { color: var(--accent-body); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
@@ -636,8 +671,8 @@
         top: 60px;
         left: 0;
         right: 0;
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
+        background: #0D1526;
+        border-bottom: 1px solid var(--hero-border);
         padding: 16px 24px 20px;
         gap: 16px;
         z-index: 99;
@@ -648,7 +683,7 @@
       .contact-grid { grid-template-columns: 1fr; gap: 32px; }
       .form-row { grid-template-columns: 1fr; }
       .budget-group { grid-template-columns: repeat(2,1fr); }
-      #hero { padding: 64px 24px 56px; }
+      #hero .hero-inner { padding: 64px 24px 56px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -679,14 +714,16 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-tag">Available for freelance projects</div>
-  <h1 class="hero-headline">
-    Websites that work<br>for your <span class="underline-word">business</span>
-  </h1>
-  <p class="hero-sub">I'm Noah — a full stack web developer based in Liverpool. I build clean, fast websites and web tools for small businesses across Merseyside and beyond.</p>
-  <div class="hero-btns">
-    <a href="#contact" class="btn-primary">Start a project</a>
-    <a href="#work" class="btn-secondary">View my work</a>
+  <div class="hero-inner">
+    <div class="hero-tag">Available for freelance projects</div>
+    <h1 class="hero-headline">
+      Websites that work<br>for your <span class="underline-word">business</span>
+    </h1>
+    <p class="hero-sub">I'm Noah — a full stack web developer based in Liverpool. I build clean, fast websites and web tools for small businesses across Merseyside and beyond.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Start a project</a>
+      <a href="#work" class="btn-secondary">View my work</a>
+    </div>
   </div>
 </section>
 
