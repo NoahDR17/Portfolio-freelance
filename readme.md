@@ -1,1 +1,1 @@
-http://127.0.0.1:3000/index.html#hero
+https://noahdr17.github.io/Portfolio-freelance/
