@@ -848,7 +848,9 @@
         </div>
       </div>
 
-      <form id="contact-form" onsubmit="handleSubmit(event)">
+      <form id="contact-form" action="https://formspree.io/f/xpqgqlye" method="POST">
+        <input type="hidden" name="service" id="service-value" value="">
+        <input type="hidden" name="budget" id="budget-value" value="">
         <div class="form-row">
           <div class="form-group">
             <label for="name">Your name</label>
@@ -907,21 +909,33 @@
 
 <script>
   function toggleChip(el) {
-    el.classList.toggle('active');
-  }
+  el.classList.toggle('active');
+  const selected = [...document.querySelectorAll('#service-chips .chip-option.active')]
+    .map(c => c.textContent).join(', ');
+  document.getElementById('service-value').value = selected;
+}
 
-  function toggleBudget(el) {
-    document.querySelectorAll('.budget-option').forEach(o => o.classList.remove('active'));
-    el.classList.add('active');
-  }
+function toggleBudget(el) {
+  document.querySelectorAll('.budget-option').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('budget-value').value = el.textContent;
+}
+  // function toggleChip(el) {
+  //   el.classList.toggle('active');
+  // }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = document.querySelector('.form-submit');
-    btn.textContent = 'Message sent ✓';
-    btn.style.background = '#1a9e5e';
-    btn.disabled = true;
-  }
+  // function toggleBudget(el) {
+  //   document.querySelectorAll('.budget-option').forEach(o => o.classList.remove('active'));
+  //   el.classList.add('active');
+  // }
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   const btn = document.querySelector('.form-submit');
+  //   btn.textContent = 'Message sent ✓';
+  //   btn.style.background = '#1a9e5e';
+  //   btn.disabled = true;
+  // }
 
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', () => {
